@@ -7,15 +7,14 @@ export default {
 
   name: { ko: "임배현", en: "Baehyeon Lim" },
   role: {
-    ko: "WPF · C# · FFmpeg 개발자",
-    en: "WPF · C# · FFmpeg Developer",
+    ko: "드론·무인기 지상 SW · WPF/Avalonia · AI",
+    en: "Drone/UAV ground software · WPF/Avalonia · AI",
   },
   tagline: {
-    ko: "영상 처리와 드론 데이터 분석을 다루는 소프트웨어 엔지니어.",
-    en: "Software engineer working on video processing and drone data.",
+    ko: "드론·무인기 지상 통제 소프트웨어를 만듭니다. WPF에서 Avalonia로, 그리고 AI 엔지니어링으로.",
+    en: "I build ground-control software for drones and UAVs — from WPF to Avalonia, and into AI engineering.",
   },
 
-  // TODO(owner): 실제 값으로 교체
   email: "void.imbae@gmail.com",
   github: "https://github.com/imbae",
   linkedin: "",

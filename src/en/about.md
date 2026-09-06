@@ -3,24 +3,37 @@ layout: layouts/page.njk
 title: About
 eyebrow: about
 heading: About
-intro: Software engineer working on video processing and drone data.
-description: About Baehyeon Lim — background, interests, and this site.
+intro: An engineer building ground software for drones and UAVs — moving from WPF to Avalonia, and into AI engineering.
+description: About Baehyeon Lim — career, education, interests, and this site.
 ---
 
-I mostly build WPF desktop applications. Past work includes a drone video player,
-MISB KLV metadata parsing, RTSP monitoring, and AI subtitles.
+I build ground software for drones and UAVs, including ground control stations
+(GCS). I've worked on WPF desktop applications for years and am now moving to
+cross-platform Avalonia while expanding into AI engineering (RAG and similar).
 
-<!-- TODO(owner): fill in real experience, education, interests -->
+## Career
 
-## Experience
+### BrainsLab · Feb 2019 – present
 
-- **2022 — present** · (company) · Senior Software Engineer
-- **2020 — 2022** · (company) · Software Engineer
-- **2018 — 2020** · (company) · Junior Developer
+Ground-control software for drones and UAVs. I develop a GCS built on an in-house
+flight protocol (ICD) — fixed-wing, multicopter and rotary-wing — and am
+migrating it to a cross-platform Avalonia UI build ([BGCS](/en/work/bgcs/)).
+I've also worked on air-vehicle test equipment (K4586 ICD), a swarm-operations
+GCS, a counter-drone detection monitor, and a PILS simulation bridge. Most
+recently I've been standing up an internal AI (RAG) server.
+
+### Samco · Aug 2016 – Dec 2018
+
+Software development.
+
+## Education
+
+- Aerospace Specialized Graduate School, Gyeongsang National University
+- B.S., Information Science, Gyeongsang National University
 
 ## Interests
 
-Video codecs, real-time streaming pipelines, desktop UI architecture, and reading.
+Video streaming, UAV ground systems, desktop UI architecture, stock investing, reading.
 
 ## Contact
 
