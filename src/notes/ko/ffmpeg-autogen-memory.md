@@ -3,7 +3,7 @@ title: ffmpeg.autogen 에서 프레임 메모리 누수 잡기
 date: 2024-08-03
 summary: WPF 영상 재생기에서 장시간 재생 시 메모리가 새던 원인 — AVFrame / AVPacket 해제 누락.
 tags: [FFmpeg, "C#", WPF]
-project: videoplayer-pro
+project: fflux
 key: ffmpeg-autogen-memory
 ---
 

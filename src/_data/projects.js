@@ -2,109 +2,153 @@
 //   type:     "work" | "personal" | "hobby"
 //   featured: /portfolio 에 노출할지 여부
 //   status:   "active" | "wip" | "archived"
-// 언어별 필드는 ko / en 하위에.
+// 언어별 필드는 ko / en 하위에. 상세 본문은 src/projects/{ko,en}/<slug>.md 에.
 //
-// TODO(owner): 아래는 이전 초안에서 옮겨온 샘플입니다. 실제 프로젝트 정보(설명,
-//   기간, 역할, GitHub 레포 URL, 성과)로 교체하세요. links.repo 는 현재 전부
-//   프로필 주소라 개별 레포 주소로 바꿔야 합니다.
+// 업무 프로젝트는 대부분 사내/국방 프로젝트라 저장소 링크가 없고, 설명도 최소한으로만 둔다.
+// TODO(owner): 기간(period)·상태(status)는 추정값이니 실제 값으로 확인.
 
 export default [
   {
-    slug: "videoplayer-pro",
+    slug: "bgcs",
     type: "work",
     featured: true,
-    period: "2024",
-    status: "active",
-    stack: ["WPF", "C#", ".NET 8", "FFmpeg", "MISB", "Whisper"],
+    period: "2026 —",
+    status: "wip",
+    stack: ["Avalonia", "C#", ".NET 10", "MVVM", "Mapsui", "FFmpeg.AutoGen"],
     links: { repo: "", demo: "", writeup: "" },
     cover: "",
     ko: {
-      title: "VideoPlayer Pro",
+      title: "BGCS — 크로스플랫폼 GCS",
       role: "설계 · 개발",
       summary:
-        "WPF 기반 드론 영상 재생기. MISB KLV 메타데이터 오버레이와 AI 자막 생성을 통합.",
-      highlights: [
-        "ffmpeg.autogen 으로 디코딩 파이프라인 직접 구성",
-        "MISB ST0601 KLV 실시간 파싱 후 지도·HUD 오버레이",
-        "OpenAI Whisper 연동 자동 자막",
-      ],
+        "WPF 기반 드론 지상통제소(GCS)를 Avalonia UI 로 다시 구현해 Windows·Android·iOS·브라우저를 한 코드베이스에서 지원하는 리뉴얼 프로젝트.",
+      highlights: [],
     },
     en: {
-      title: "VideoPlayer Pro",
+      title: "BGCS — cross-platform GCS",
       role: "Design · Development",
       summary:
-        "WPF drone-video player with MISB KLV metadata overlay and AI subtitle generation.",
-      highlights: [
-        "Custom decode pipeline via ffmpeg.autogen",
-        "Real-time MISB ST0601 KLV parsing with map/HUD overlay",
-        "Automatic subtitles through OpenAI Whisper",
-      ],
+        "A rebuild of a WPF drone ground control station on Avalonia UI, supporting Windows, Android, iOS and the browser from one codebase.",
+      highlights: [],
     },
   },
   {
-    slug: "klv-parser",
+    slug: "gcsdev",
     type: "work",
     featured: true,
-    period: "2024",
-    status: "wip",
-    stack: ["C#", "MISB ST0601", ".NET", "KLV"],
-    links: { repo: "", demo: "", writeup: "" },
-    cover: "",
-    ko: {
-      title: "MISB KLV Parser",
-      role: "개발",
-      summary: "드론 영상 스트림에서 MISB ST0601 메타데이터를 실시간 파싱하는 라이브러리.",
-      highlights: ["ST0601 태그 세트 구현", "스트리밍 파서 (부분 프레임 대응)"],
-    },
-    en: {
-      title: "MISB KLV Parser",
-      role: "Development",
-      summary: "Library that parses MISB ST0601 metadata from drone video streams in real time.",
-      highlights: ["ST0601 tag-set implementation", "Streaming parser tolerant of partial frames"],
-    },
-  },
-  {
-    slug: "rtsp-monitor",
-    type: "work",
-    featured: false,
-    period: "2023",
-    status: "active",
-    stack: ["WPF", "RTSP", "FFmpeg", "C#"],
-    links: { repo: "", demo: "", writeup: "" },
-    cover: "",
-    ko: {
-      title: "RTSP Stream Monitor",
-      role: "개발",
-      summary: "다중 RTSP 채널을 동시에 모니터링하는 관제 클라이언트.",
-      highlights: ["채널별 독립 디코드 스레드", "재연결·백오프 처리"],
-    },
-    en: {
-      title: "RTSP Stream Monitor",
-      role: "Development",
-      summary: "Surveillance client that monitors many RTSP channels at once.",
-      highlights: ["Independent decode thread per channel", "Reconnect with backoff"],
-    },
-  },
-  {
-    slug: "gis-overlay",
-    type: "work",
-    featured: false,
-    period: "2023",
+    period: "2019 — 2026",
     status: "archived",
-    stack: ["WPF", "OpenLayers", "GIS", "C#"],
+    stack: ["WPF", "C#", ".NET 8", "MVVM", "HelixToolkit", "커스텀 ICD"],
     links: { repo: "", demo: "", writeup: "" },
     cover: "",
     ko: {
-      title: "GIS Map Overlay",
+      title: "GCSdev — 드론 지상통제소",
       role: "개발",
-      summary: "드론 비행 경로와 센서 데이터를 지도에 실시간 오버레이하는 WPF 컴포넌트.",
-      highlights: ["좌표 변환 유틸", "WebView2 ↔ WPF 브리지"],
+      summary:
+        "자체 정의한 비행 프로토콜(ICD)로 비행제어컴퓨터와 통신하는 Windows GCS. 고정익·멀티콥터·헬리콥터를 지원하며, 현재 크로스플랫폼(BGCS)으로 이관 중.",
+      highlights: [],
     },
     en: {
-      title: "GIS Map Overlay",
+      title: "GCSdev — ground control station",
       role: "Development",
-      summary: "WPF component that overlays drone flight paths and sensor data on a map.",
-      highlights: ["Coordinate transform utilities", "WebView2 ↔ WPF bridge"],
+      summary:
+        "A Windows GCS that talks to the flight-control computer over an in-house flight protocol (ICD), supporting fixed-wing, multicopter and rotary-wing. Now being superseded by the cross-platform BGCS.",
+      highlights: [],
+    },
+  },
+  {
+    slug: "air-vehicle-test-equipment",
+    type: "work",
+    featured: true,
+    period: "2025 — 2026",
+    status: "archived",
+    stack: ["WPF", "C#", ".NET 8", "K4586 ICD", "Multicast UDP"],
+    links: { repo: "", demo: "", writeup: "" },
+    cover: "",
+    ko: {
+      title: "비행체 점검 장비 (AVTE)",
+      role: "개발",
+      summary:
+        "비행체 지상 점검을 자동화하는 장비 소프트웨어. 국방 규격 K4586 ICD 기반 메시지 인터페이스를 구현해 점검 절차 수행·판정·보고서 생성을 담당한다.",
+      highlights: [],
+    },
+    en: {
+      title: "Air Vehicle Test Equipment (AVTE)",
+      role: "Development",
+      summary:
+        "Software for equipment that automates ground checks of an air vehicle. Built on a K4586 ICD-based message interface to run check sequences, evaluate results and generate reports.",
+      highlights: [],
+    },
+  },
+  {
+    slug: "swarm-sync-hub",
+    type: "work",
+    featured: false,
+    period: "2024 —",
+    status: "archived",
+    stack: ["WPF", "C#", ".NET 8"],
+    links: { repo: "", demo: "", writeup: "" },
+    cover: "",
+    ko: {
+      title: "군집 운용 GCS",
+      role: "개발",
+      summary: "다수 무인기를 동시에 운용하는 군용 지상통제 소프트웨어. 세부 내용은 비공개.",
+      highlights: [],
+    },
+    en: {
+      title: "Swarm operations GCS",
+      role: "Development",
+      summary:
+        "Military ground-control software for operating many unmanned vehicles at once. Details withheld.",
+      highlights: [],
+    },
+  },
+  {
+    slug: "drone-detecting-monitor",
+    type: "work",
+    featured: false,
+    period: "2023 —",
+    status: "active",
+    stack: ["WPF", "C#", ".NET 8", "UDP", "GMap.NET"],
+    links: { repo: "", demo: "", writeup: "" },
+    cover: "",
+    ko: {
+      title: "드론 탐지 장비 모니터",
+      role: "개발",
+      summary:
+        "드론 탐지 장비가 보내는 UDP 데이터를 받아 지도에 시각화하고, 로그 저장·리플레이까지 처리하는 모니터링 클라이언트.",
+      highlights: [],
+    },
+    en: {
+      title: "Counter-drone detection monitor",
+      role: "Development",
+      summary:
+        "A monitoring client that ingests UDP data from drone-detection hardware, plots it on a map, and records logs for replay.",
+      highlights: [],
+    },
+  },
+  {
+    slug: "pils-app",
+    type: "work",
+    featured: false,
+    period: "2020 —",
+    status: "active",
+    stack: ["WPF", "C#", ".NET 8", "Serial", "MSFS / X-Plane", "GMap.NET"],
+    links: { repo: "", demo: "", writeup: "" },
+    cover: "",
+    ko: {
+      title: "PILS 시뮬레이션 앱",
+      role: "개발",
+      summary:
+        "상용 비행 시뮬레이터(MSFS·X-Plane)와 비행 소프트웨어를 시리얼로 연결해, 실제 기체 없이 비행 동역학 위에서 시험하게 해주는 PILS(Pilot-In-the-Loop Simulation) 브리지.",
+      highlights: [],
+    },
+    en: {
+      title: "PILS simulation app",
+      role: "Development",
+      summary:
+        "A PILS (Pilot-In-the-Loop Simulation) bridge that links a commercial flight simulator (MSFS / X-Plane) to the flight software over serial, so it can be tested against flight dynamics with no real aircraft.",
+      highlights: [],
     },
   },
 

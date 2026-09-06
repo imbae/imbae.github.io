@@ -3,7 +3,7 @@ title: MISB ST0601 KLV 파싱 처음 잡을 때 헷갈렸던 것
 date: 2024-11-12
 summary: 드론 영상 스트림에서 KLV 메타데이터를 뽑을 때 마주친 BER 길이 인코딩과 로컬 세트 구조 정리.
 tags: [MISB, KLV, "C#"]
-project: klv-parser
+project: fflux
 key: misb-klv-basics
 ---
 

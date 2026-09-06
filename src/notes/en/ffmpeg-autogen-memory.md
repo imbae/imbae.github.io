@@ -3,7 +3,7 @@ title: Fixing a frame memory leak in ffmpeg.autogen
 date: 2024-08-03
 summary: A WPF player leaked memory on long playback — missing AVFrame / AVPacket cleanup.
 tags: [FFmpeg, "C#", WPF]
-project: videoplayer-pro
+project: fflux
 key: ffmpeg-autogen-memory
 ---
 
