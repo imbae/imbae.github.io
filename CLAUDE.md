@@ -11,6 +11,9 @@ GitHub Pages(`imbae.github.io`)에 GitHub Actions 로 자동 배포한다.
 - **호스팅**: GitHub Pages (Source = GitHub Actions)
 - **디자인**: 다크 테마(`#0e0e0e`) + 라임 포인트(`#c8f53e`), Bebas Neue / DM Sans / DM Mono
 
+> 사람이 읽는 초보자용 가이드는 [`docs/guides/`](docs/guides/) 에 있다
+> (환경 구축 · 사이트 구조 · 콘텐츠 수정). 이 파일은 그 압축본.
+
 ## 디렉터리 구조
 
 ```

@@ -11,6 +11,11 @@ npm run dev      # http://localhost:8080
 npm run build    # → _site/
 ```
 
+## 처음이라면
+
+웹 개발이 처음이면 [`docs/guides/`](./docs/guides/) 를 순서대로 읽으세요
+(환경 구축 → 사이트 구조 → 콘텐츠 수정, 용어부터 풀어서 설명).
+
 ## 구조 · 콘텐츠 수정
 
 전체 구조와 "어디를 고치면 되는지"는 [`CLAUDE.md`](./CLAUDE.md) 참고. 요약:
