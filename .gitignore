@@ -30,3 +30,6 @@ build/
 # 임시 파일
 *.tmp
 *.bak
+
+# 로컬 스크래치 (dev server 로그 등)
+scratch_*

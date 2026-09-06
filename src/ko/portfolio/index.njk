@@ -39,7 +39,7 @@ description: 임배현 — WPF · C# · FFmpeg 개발자. 주요 프로젝트 �
       <p>{{ c.summary }}</p>
       <div class="project-row__tags" style="margin-top:var(--space-2)">{%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}</div>
       {%- if c.highlights.length -%}<ul>{%- for h in c.highlights -%}<li>{{ h }}</li>{%- endfor -%}</ul>{%- endif -%}
-      <p style="margin-top:var(--space-2)"><a href="/work/{{ p.slug }}/">상세 →</a></p>
+      <p style="margin-top:var(--space-2)"><a href="/{{ 'work' if p.type == 'work' else 'projects' }}/{{ p.slug }}/">상세 →</a></p>
     </div>
   {%- endfor -%}
 

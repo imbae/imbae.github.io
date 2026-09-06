@@ -108,7 +108,79 @@ export default [
     },
   },
 
-  // ── 개인 프로젝트 예시 (TODO(owner): 실제 내용으로) ──
+  // ── 개인 프로젝트 ──
+  {
+    slug: "fflux",
+    type: "personal",
+    featured: true,
+    period: "2026 —",
+    status: "active",
+    stack: ["WPF", ".NET 10", "ffmpeg.autogen", "MVVM", "Whisper", "MISB"],
+    links: { repo: "https://github.com/imbae/fflux", demo: "", writeup: "" },
+    cover: "",
+    ko: {
+      title: "fflux",
+      role: "설계 · 개발",
+      summary:
+        "ffmpeg.autogen API를 직접 호출하는 개발자용 WPF 비디오 플레이어. 외부 ffmpeg.exe 프로세스 없이, LGPL 조건을 지키며 실시간 통계·구간 녹화·자막 편집·AI 자막·MISB KLV까지 다룬다.",
+      highlights: [],
+    },
+    en: {
+      title: "fflux",
+      role: "Design · Development",
+      summary:
+        "A developer-focused WPF video player that calls the ffmpeg.autogen API directly — no external ffmpeg.exe process, LGPL-compliant — covering live stats, segment recording, subtitle editing, AI subtitles and MISB KLV.",
+      highlights: [],
+    },
+  },
+  {
+    slug: "portsight",
+    type: "personal",
+    featured: false,
+    period: "2026 —",
+    status: "active",
+    stack: ["Flutter", "Dart", "Riverpod", "Drift", "FastAPI", "Python"],
+    links: { repo: "", demo: "", writeup: "" }, // private repo
+    cover: "",
+    ko: {
+      title: "PortSight",
+      role: "전체",
+      summary:
+        "실제 주식 투자자를 위한 포트폴리오 분석 앱. 보유 종목을 넣으면 기술적 지표 분석, 계좌 유형별 전략 추천, 세금·배당 계산, 리밸런싱 가이드를 제공한다. 모의투자 기능은 없다.",
+      highlights: [],
+    },
+    en: {
+      title: "PortSight",
+      role: "Everything",
+      summary:
+        "A portfolio-analysis app for real stock investors. Enter your holdings and it runs technical-indicator analysis, account-type strategy suggestions, tax and dividend math, and a rebalancing guide. No paper trading.",
+      highlights: [],
+    },
+  },
+  {
+    slug: "whenwhere",
+    type: "personal",
+    featured: false,
+    period: "2026 —",
+    status: "wip",
+    stack: ["Flutter", "Dart", "Riverpod", "Drift", "Mapbox"],
+    links: { repo: "", demo: "", writeup: "" }, // private repo
+    cover: "",
+    ko: {
+      title: "WhenWhere (기억달력)",
+      role: "전체",
+      summary:
+        "캘린더를 중심에 두고, 장소 기반 근접 알림과 하루 동선 자동 요약을 얹은 크로스플랫폼 개인 기록 앱. 모든 기록은 개인/업무 워크스페이스로 나뉜다.",
+      highlights: [],
+    },
+    en: {
+      title: "WhenWhere",
+      role: "Everything",
+      summary:
+        "A cross-platform personal-log app built around the calendar, adding place-based proximity reminders and an automatic daily-route summary. Every entry is split into personal / work workspaces.",
+      highlights: [],
+    },
+  },
   {
     slug: "this-site",
     type: "personal",
