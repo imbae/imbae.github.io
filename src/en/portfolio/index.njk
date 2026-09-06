@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: Portfolio
+description: Baehyeon Lim — WPF · C# · FFmpeg developer. Selected work.
+---
+{%- set featured = projectSets.featured -%}
+{%- set skills = ["WPF", "C#", ".NET 8", "MVVM", "FFmpeg", "ffmpeg.autogen", "RTSP", "H.264/265", "MISB ST0601", "KLV", "OpenLayers", "Whisper", "OpenAI API", "Python"] -%}
+<div class="page-head">
+  <div class="container">
+    <p class="page-head__label">portfolio</p>
+    <h1 class="page-head__title">{{ site.name.en }}</h1>
+    <p class="page-head__intro">{{ site.role.en }}. I build WPF desktop applications in the video-processing and drone-data domain.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="pf-summary">
+    <div>
+      <h2 class="section-label">Contact</h2>
+      <ul style="margin-top:var(--space-3);line-height:2">
+        <li>Email — <a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li>GitHub — <a href="{{ site.github }}" target="_blank" rel="noopener">{{ site.github }}</a></li>
+        {%- if site.linkedin %}<li>LinkedIn — <a href="{{ site.linkedin }}" target="_blank" rel="noopener">{{ site.linkedin }}</a></li>{%- endif -%}
+      </ul>
+      <p style="margin-top:var(--space-4)"><a class="btn btn-ghost" href="/en/notes/">Technical notes →</a></p>
+    </div>
+    <div>
+      <h2 class="section-label">Skills</h2>
+      <div class="pf-skill-list" style="margin-top:var(--space-3)">
+        {%- for s in skills -%}<span class="tag tag-gray">{{ s }}</span>{%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title display-font" style="margin:var(--space-16) 0 var(--space-6)">Selected projects</h2>
+  {%- for p in featured -%}
+    {%- set c = p.en -%}
+    <div class="pf-project">
+      <h3>{{ c.title }} <span class="mono-font" style="color:var(--color-muted-2);font-size:0.85rem">· {{ p.period }}</span></h3>
+      <p>{{ c.summary }}</p>
+      <div class="project-row__tags" style="margin-top:var(--space-2)">{%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}</div>
+      {%- if c.highlights.length -%}<ul>{%- for h in c.highlights -%}<li>{{ h }}</li>{%- endfor -%}</ul>{%- endif -%}
+      <p style="margin-top:var(--space-2)"><a href="/en/work/{{ p.slug }}/">Details →</a></p>
+    </div>
+  {%- endfor -%}
+
+  <p class="text-muted" style="margin-top:var(--space-10)">Print (⌘/Ctrl + P) to save as PDF.</p>
+</div>

@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: 업무 프로젝트
+description: 회사에서 진행한 WPF · 영상 처리 · 드론 데이터 프로젝트.
+---
+{%- from "partials/macros.njk" import projectRow -%}
+{%- set items = projects | hasType("work") -%}
+<div class="page-head">
+  <div class="container">
+    <p class="page-head__label">what i've shipped at work</p>
+    <h1 class="page-head__title">Work</h1>
+    <p class="page-head__intro">회사에서 진행한 프로젝트. 상세 페이지에 한 일과 관련 글을 정리했습니다.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="project-list">
+    {%- for p in items -%}
+      {%- set c = p.ko -%}
+      <article class="project-row" data-href="/work/{{ p.slug }}/" tabindex="0" role="link" aria-label="{{ c.title }}">
+        <span class="project-row__num mono-font">{{ "0" if loop.index < 10 else "" }}{{ loop.index }}</span>
+        <div class="project-row__info">
+          <div class="project-row__name"><a href="/work/{{ p.slug }}/">{{ c.title }}</a></div>
+          <div class="project-row__desc">{{ c.summary }}</div>
+          <div class="project-row__tags">{%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}</div>
+        </div>
+        <div class="project-row__meta">
+          <span class="project-row__year mono-font">{{ p.period }}</span>
+          <span class="status status-{{ p.status }}">{{ {active:"진행",wip:"작업중",archived:"보관"}[p.status] }}</span>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>

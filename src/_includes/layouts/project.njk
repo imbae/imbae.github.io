@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+---
+{%- set L = lang or "ko" -%}
+{%- set p = project -%}
+{%- set c = p[L] -%}
+{%- set listUrl = (("/en" if L == "en" else "") + ("/work/" if p.type == "work" else "/projects/")) -%}
+{%- set statusLabel = { active: ("진행 중" if L=="ko" else "active"), wip: ("작업 중" if L=="ko" else "in progress"), archived: ("보관" if L=="ko" else "archived") } -%}
+{%- set rel = collections.note | relatedNotes(p.slug, L) -%}
+
+<div class="page-head">
+  <div class="container container--narrow">
+    <p class="page-head__label"><a href="{{ listUrl }}">{{ site.ui.backTo[L] }}</a></p>
+    <h1 class="page-head__title" style="font-size:clamp(2.25rem,6vw,3.5rem)">{{ c.title }}</h1>
+    <div class="detail-meta">
+      <span>{{ p.period }}</span>
+      <span class="status status-{{ p.status }}">{{ statusLabel[p.status] }}</span>
+      {%- if c.role %}<span>· {{ c.role }}</span>{% endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="container container--narrow">
+  <div class="prose">
+    <p>{{ c.summary }}</p>
+
+    <div class="project-row__tags" style="margin-top:var(--space-4)">
+      {%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}
+    </div>
+
+    {%- if c.highlights and c.highlights.length -%}
+    <h2>{{ '한 일' if L == 'ko' else 'What I did' }}</h2>
+    <ul>
+      {%- for h in c.highlights -%}<li>{{ h }}</li>{%- endfor -%}
+    </ul>
+    {%- endif -%}
+
+    {%- if p.links.repo or p.links.demo -%}
+    <h2>{{ '링크' if L == 'ko' else 'Links' }}</h2>
+    <ul>
+      {%- if p.links.repo %}<li><a href="{{ p.links.repo }}" target="_blank" rel="noopener">GitHub</a></li>{% endif -%}
+      {%- if p.links.demo %}<li><a href="{{ p.links.demo }}" target="_blank" rel="noopener">{{ '데모' if L == 'ko' else 'Demo' }}</a></li>{% endif -%}
+    </ul>
+    {%- endif -%}
+
+    {%- if rel.length -%}
+    <h2>{{ site.ui.relatedNotes[L] }}</h2>
+    <ul>
+      {%- for n in rel -%}<li><a href="{{ n.url }}">{{ n.data.title }}</a> <span class="mono-font" style="color:var(--color-muted-2);font-size:0.8rem">{{ n.date | localdate(L) }}</span></li>{%- endfor -%}
+    </ul>
+    {%- else -%}
+    <p class="text-muted" style="margin-top:var(--space-8)">{{ '아직 이 프로젝트에 대한 글이 없습니다.' if L == 'ko' else 'No notes for this project yet.' }}</p>
+    {%- endif -%}
+  </div>
+</div>

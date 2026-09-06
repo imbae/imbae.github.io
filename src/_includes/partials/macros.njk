@@ -1,0 +1,52 @@
+{# 재사용 매크로: 프로젝트 행, 노트 카드, 책 행 #}
+
+{% macro projectRow(p, i, L) %}
+  {%- set c = p[L] -%}
+  {%- set href = p.links.repo or p.links.demo or p.links.writeup -%}
+  {%- set statusLabel = { active: ("진행" if L=="ko" else "active"), wip: ("작업중" if L=="ko" else "in progress"), archived: ("보관" if L=="ko" else "archived") } -%}
+  <article class="project-row"
+    {%- if href %} data-href="{{ href }}" data-external="true" tabindex="0" role="link" aria-label="{{ c.title }}"{% endif %}>
+    <span class="project-row__num mono-font">{{ "0" if (i + 1) < 10 else "" }}{{ i + 1 }}</span>
+    <div class="project-row__info">
+      <div class="project-row__name">{{ c.title }}</div>
+      <div class="project-row__desc">{{ c.summary }}</div>
+      <div class="project-row__tags">
+        {%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}
+      </div>
+    </div>
+    <div class="project-row__meta">
+      <span class="project-row__year mono-font">{{ p.period }}</span>
+      <span class="status status-{{ p.status }}">{{ statusLabel[p.status] }}</span>
+      <div class="project-row__links">
+        {%- if p.links.repo %}<a class="project-row__link" href="{{ p.links.repo }}" target="_blank" rel="noopener" title="GitHub">GH</a>{% endif -%}
+        {%- if p.links.demo %}<a class="project-row__link" href="{{ p.links.demo }}" target="_blank" rel="noopener" title="Demo">↗</a>{% endif -%}
+      </div>
+    </div>
+  </article>
+{% endmacro %}
+
+{% macro noteCard(note, L) %}
+  <a class="note-card" href="{{ note.url }}" data-tags="{{ note.data.tags | join(',') }}">
+    <span class="note-card__date mono-font">{{ note.date | localdate(L) }}</span>
+    <div class="note-card__title">{{ note.data.title }}</div>
+    {%- if note.data.summary %}<p>{{ note.data.summary }}</p>{% endif -%}
+    <div class="note-card__tags">
+      {%- for t in note.data.tags -%}{%- if t != "note" -%}<span class="tag tag-gray">{{ t }}</span>{%- endif -%}{%- endfor -%}
+    </div>
+  </a>
+{% endmacro %}
+
+{% macro bookRow(b, L) %}
+  <div class="book-row">
+    <div>
+      <span class="book-row__title">{% if b.link %}<a href="{{ b.link }}" target="_blank" rel="noopener">{{ b.title }}</a>{% else %}{{ b.title }}{% endif %}</span>
+      <span class="book-row__author">— {{ b.author }}</span>
+      {%- if b[L].note %}<div class="book-row__note">{{ b[L].note }}</div>{% endif -%}
+    </div>
+    {%- if b.status == "done" and b.rating -%}
+      <span class="book-row__rating" aria-label="{{ b.rating }}/5">{{ "★".repeat(b.rating) }}{{ "☆".repeat(5 - b.rating) }}</span>
+    {%- elif b.finished -%}
+      <span class="book-row__rating">{{ b.finished }}</span>
+    {%- endif -%}
+  </div>
+{% endmacro %}

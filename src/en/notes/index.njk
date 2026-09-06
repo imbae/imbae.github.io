@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: Notes
+description: Things learned while building projects — troubleshooting and guides.
+---
+{%- from "partials/macros.njk" import noteCard -%}
+{%- set notes = collections.notesEn -%}
+{%- set tags = notes | uniqueTags -%}
+<div class="page-head">
+  <div class="container container--narrow">
+    <p class="page-head__label">things i learned</p>
+    <h1 class="page-head__title">Notes</h1>
+    <p class="page-head__intro">Things learned while building projects — troubleshooting and guides.</p>
+  </div>
+</div>
+<div class="container container--narrow">
+  {%- if tags.length -%}
+  <div class="note-filter" role="group" aria-label="Filter by tag">
+    <button data-tag="*" aria-pressed="true">all</button>
+    {%- for t in tags -%}<button data-tag="{{ t }}" aria-pressed="false">{{ t }}</button>{%- endfor -%}
+  </div>
+  {%- endif -%}
+  {%- if notes.length -%}
+  <div class="note-list">{%- for n in notes -%}{{ noteCard(n, "en") }}{%- endfor -%}</div>
+  {%- else -%}
+  <p class="text-muted">No notes in English yet.</p>
+  {%- endif -%}
+</div>

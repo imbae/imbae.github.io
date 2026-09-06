@@ -1,0 +1,35 @@
+{%- set L = lang or "ko" -%}
+{%- set home = "/en/" if L == "en" else "/" -%}
+<header>
+  <nav class="nav" aria-label="{{ '주요' if L == 'ko' else 'Primary' }}">
+    <div class="nav__progress" role="presentation"></div>
+    <div class="container nav__inner">
+      <a href="{{ home }}" class="nav__logo" aria-label="{{ site.name[L] }} — home">IMBAE</a>
+
+      <ul class="nav__links" role="list">
+        {%- for item in site.nav -%}
+          {%- set loc = ("/en" + item.url) if L == "en" else item.url -%}
+          {%- set active = (page.url == loc) or (page.url.startsWith(loc) and loc.length > home.length) -%}
+          <li>
+            <a class="nav__link" href="{{ loc }}"{% if active %} aria-current="page"{% endif %}>{{ item.label[L] }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="nav__right">
+        <a class="nav__lang" href="{{ page.url | altLangUrl(L) }}" hreflang="{{ 'en' if L == 'ko' else 'ko' }}" rel="alternate">{{ site.ui.switchTo[L] }}</a>
+        <button class="nav__hamburger" aria-label="{{ '메뉴' if L == 'ko' else 'Menu' }}" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobile-menu">
+      {%- for item in site.nav -%}
+        {%- set loc = ("/en" + item.url) if L == "en" else item.url -%}
+        <a class="nav__mobile-link" href="{{ loc }}">{{ item.label[L] }}</a>
+      {%- endfor -%}
+      <a class="nav__lang" href="{{ page.url | altLangUrl(L) }}">{{ site.ui.switchTo[L] }}</a>
+    </div>
+  </nav>
+</header>

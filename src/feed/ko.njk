@@ -1,0 +1,25 @@
+---
+permalink: /feed/ko.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.name.ko }} — 글</title>
+  <subtitle>{{ site.tagline.ko }}</subtitle>
+  <link href="{{ site.url }}/feed/ko.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ collections.notesKo | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ site.url }}/</id>
+  <author><name>{{ site.name.ko }}</name></author>
+  {%- for note in collections.notesKo %}
+  {%- set absUrl = site.url + note.url %}
+  <entry>
+    <title>{{ note.data.title }}</title>
+    <link href="{{ absUrl }}"/>
+    <updated>{{ note.date | dateToRfc3339 }}</updated>
+    <id>{{ absUrl }}</id>
+    {%- if note.data.summary %}<summary>{{ note.data.summary }}</summary>{% endif %}
+    <content type="html">{{ note.templateContent | htmlToAbsoluteUrls(absUrl) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

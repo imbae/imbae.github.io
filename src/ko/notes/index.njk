@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+title: 글
+description: 프로젝트를 진행하며 배운 것, 트러블슈팅, 가이드 모음.
+---
+{%- from "partials/macros.njk" import noteCard -%}
+{%- set notes = collections.notesKo -%}
+{%- set tags = notes | uniqueTags -%}
+<div class="page-head">
+  <div class="container container--narrow">
+    <p class="page-head__label">things i learned</p>
+    <h1 class="page-head__title">Notes</h1>
+    <p class="page-head__intro">프로젝트를 진행하며 배운 것, 트러블슈팅, 가이드.</p>
+  </div>
+</div>
+<div class="container container--narrow">
+  {%- if tags.length -%}
+  <div class="note-filter" role="group" aria-label="태그 필터">
+    <button data-tag="*" aria-pressed="true">전체</button>
+    {%- for t in tags -%}<button data-tag="{{ t }}" aria-pressed="false">{{ t }}</button>{%- endfor -%}
+  </div>
+  {%- endif -%}
+  {%- if notes.length -%}
+  <div class="note-list">
+    {%- for n in notes -%}{{ noteCard(n, "ko") }}{%- endfor -%}
+  </div>
+  {%- else -%}
+  <p class="text-muted">아직 글이 없습니다. 곧 채워집니다.</p>
+  {%- endif -%}
+</div>

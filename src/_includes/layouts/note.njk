@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+---
+{%- set L = lang or "ko" -%}
+{%- set listUrl = ("/en/notes/" if L == "en" else "/notes/") -%}
+<article class="page-head">
+  <div class="container container--narrow">
+    <p class="page-head__label"><a href="{{ listUrl }}">{{ site.ui.backTo[L] }}</a></p>
+    <h1 class="page-head__title" style="font-size:clamp(2rem,5vw,3rem)">{{ title }}</h1>
+    <div class="detail-meta">
+      <span>{{ date | localdate(L) }}</span>
+      {%- if updated %}<span>· {{ site.ui.updated[L] }} {{ updated | localdate(L) }}</span>{% endif -%}
+      {%- for t in tags -%}{%- if t != "note" -%}<span class="tag tag-gray">{{ t }}</span>{%- endif -%}{%- endfor -%}
+    </div>
+    {%- set pr = projects | findBySlug(project) -%}
+    {%- if pr -%}
+      <p class="detail-meta"><span>{{ '프로젝트' if L == 'ko' else 'Project' }}:</span>
+        <a href="{{ ('/en' if L == 'en' else '') }}/{{ 'work' if pr.type == 'work' else 'projects' }}/{{ pr.slug }}/">{{ pr[L].title }}</a></p>
+    {%- endif -%}
+  </div>
+</article>
+<div class="container container--narrow">
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+</div>

@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+---
+{%- from "partials/macros.njk" import projectRow, noteCard -%}
+{%- set recentWork = (projects | hasType("work") | limit(3)) -%}
+{%- set recentNotes = (collections.notesEn | limit(4)) -%}
+
+<section class="hero" aria-label="Intro">
+  <div class="container hero__inner">
+    <div class="hero__badge"><span class="hero__badge-dot"></span><span>available for work</span></div>
+    <p class="hero__name">{{ site.name.en }}</p>
+    <h1 class="hero__title display-font">DEVELOPER</h1>
+    <p class="hero__sub">{{ site.tagline.en }} WPF desktop apps, MISB KLV parsing, AI subtitles — complex domains, tidy code.</p>
+    <div class="hero__actions">
+      <a href="/en/work/" class="btn btn-primary">Work →</a>
+      <a href="/en/portfolio/" class="btn btn-ghost">Portfolio</a>
+    </div>
+    <div class="hero__scroll-hint"><span class="hero__scroll-line"></span><span class="hero__scroll-text">scroll</span></div>
+  </div>
+</section>
+
+<section class="section home-block" aria-labelledby="now-title">
+  <div class="container">
+    <div class="section-header">
+      <div><p class="section-label">right now</p><h2 id="now-title" class="section-title display-font">Now</h2></div>
+      <a class="section-number mono-font" href="/en/now/">/now →</a>
+    </div>
+    <p style="max-width:60ch">Building a drone video-processing system and writing up what I learn in
+      <a href="/en/notes/">notes</a>. On the side: static-site tooling and a reading log.</p>
+  </div>
+</section>
+
+<section class="section home-block" aria-labelledby="home-work">
+  <div class="container">
+    <div class="section-header">
+      <div><p class="section-label">recent work</p><h2 id="home-work" class="section-title display-font">Work</h2></div>
+      <a class="section-number mono-font" href="/en/work/">all →</a>
+    </div>
+    <div class="project-list">
+      {%- for p in recentWork -%}{{ projectRow(p, loop.index0, "en") }}{%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="section home-block" aria-labelledby="home-notes">
+  <div class="container">
+    <div class="section-header">
+      <div><p class="section-label">recent notes</p><h2 id="home-notes" class="section-title display-font">Notes</h2></div>
+      <a class="section-number mono-font" href="/en/notes/">all →</a>
+    </div>
+    {%- if recentNotes.length -%}
+    <div class="note-list">{%- for n in recentNotes -%}{{ noteCard(n, "en") }}{%- endfor -%}</div>
+    {%- else -%}<p class="text-muted">No notes yet.</p>{%- endif -%}
+  </div>
+</section>

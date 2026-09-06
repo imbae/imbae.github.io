@@ -1,0 +1,12 @@
+---js
+{
+  layout: "layouts/project.njk",
+  pagination: { data: "projectSets.personal", size: 1, alias: "project" },
+  permalink: (data) => `/projects/${data.project.slug}/`,
+  lang: "ko",
+  eleventyComputed: {
+    title: (data) => data.project.ko.title,
+    description: (data) => data.project.ko.summary
+  }
+}
+---

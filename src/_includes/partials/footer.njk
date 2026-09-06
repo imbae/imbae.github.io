@@ -1,0 +1,13 @@
+{%- set L = lang or "ko" -%}
+<footer class="footer">
+  <div class="container footer__inner">
+    <span class="footer__copy">© {{ site.buildYear }} {{ site.name[L] }}</span>
+    <div class="footer__links">
+      <a href="{{ site.github }}" target="_blank" rel="noopener me">GitHub</a>
+      <a href="mailto:{{ site.email }}">Email</a>
+      <a href="{{ '/feed/ko.xml' if L == 'ko' else '/feed/en.xml' }}">RSS</a>
+      <a href="{{ site.repo }}" target="_blank" rel="noopener">{{ '소스' if L == 'ko' else 'Source' }}</a>
+    </div>
+    <span class="footer__credit">{{ 'Eleventy 로 만듦' if L == 'ko' else 'Built with Eleventy' }}</span>
+  </div>
+</footer>

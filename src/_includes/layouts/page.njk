@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+{%- set L = lang or "ko" -%}
+<div class="page-head">
+  <div class="container container--narrow">
+    {%- if eyebrow %}<p class="page-head__label">{{ eyebrow }}</p>{% endif -%}
+    <h1 class="page-head__title">{{ heading or title }}</h1>
+    {%- if intro %}<p class="page-head__intro">{{ intro }}</p>{% endif -%}
+  </div>
+</div>
+<div class="container container--narrow">
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+</div>

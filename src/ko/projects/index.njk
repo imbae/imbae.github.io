@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+title: 개인 프로젝트
+description: 사이드 프로젝트와 취미 — 만든 것들과 독서 기록.
+---
+{%- set items = projects | hasType("personal") -%}
+<div class="page-head">
+  <div class="container">
+    <p class="page-head__label">side projects &amp; hobbies</p>
+    <h1 class="page-head__title">Projects</h1>
+    <p class="page-head__intro">업무 밖에서 만든 것들. 독서 기록은 <a href="/bookshelf/">책장</a>에 따로 있습니다.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="project-list">
+    {%- for p in items -%}
+      {%- set c = p.ko -%}
+      <article class="project-row" data-href="/projects/{{ p.slug }}/" tabindex="0" role="link" aria-label="{{ c.title }}">
+        <span class="project-row__num mono-font">{{ "0" if loop.index < 10 else "" }}{{ loop.index }}</span>
+        <div class="project-row__info">
+          <div class="project-row__name"><a href="/projects/{{ p.slug }}/">{{ c.title }}</a></div>
+          <div class="project-row__desc">{{ c.summary }}</div>
+          <div class="project-row__tags">{%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}</div>
+        </div>
+        <div class="project-row__meta">
+          <span class="project-row__year mono-font">{{ p.period }}</span>
+          <span class="status status-{{ p.status }}">{{ {active:"진행",wip:"작업중",archived:"보관"}[p.status] }}</span>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>

@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+title: Projects
+description: Side projects and hobbies — things I've made, plus a reading log.
+---
+{%- set items = projects | hasType("personal") -%}
+<div class="page-head">
+  <div class="container">
+    <p class="page-head__label">side projects &amp; hobbies</p>
+    <h1 class="page-head__title">Projects</h1>
+    <p class="page-head__intro">Things made outside work. The reading log lives on the <a href="/en/bookshelf/">bookshelf</a>.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="project-list">
+    {%- for p in items -%}
+      {%- set c = p.en -%}
+      <article class="project-row" data-href="/en/projects/{{ p.slug }}/" tabindex="0" role="link" aria-label="{{ c.title }}">
+        <span class="project-row__num mono-font">{{ "0" if loop.index < 10 else "" }}{{ loop.index }}</span>
+        <div class="project-row__info">
+          <div class="project-row__name"><a href="/en/projects/{{ p.slug }}/">{{ c.title }}</a></div>
+          <div class="project-row__desc">{{ c.summary }}</div>
+          <div class="project-row__tags">{%- for t in p.stack -%}<span class="tag tag-gray">{{ t }}</span>{%- endfor -%}</div>
+        </div>
+        <div class="project-row__meta">
+          <span class="project-row__year mono-font">{{ p.period }}</span>
+          <span class="status status-{{ p.status }}">{{ {active:"active",wip:"in progress",archived:"archived"}[p.status] }}</span>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>

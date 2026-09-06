@@ -1,296 +1,114 @@
-# CLAUDE.md — 개인 포트폴리오 웹사이트
+# CLAUDE.md — 임배현 개인 홈페이지
 
-## 📌 프로젝트 개요
+## 개요
 
-GitHub Pages로 호스팅하는 개인 포트폴리오 정적 웹사이트.
-Cloudflare를 CDN/보안 레이어로 사용하며, 순수 HTML/CSS/JS로 구성된 단일 파일 기반 구조.
+임배현(Baehyeon Lim)의 개인 홈페이지. **Eleventy(11ty)** 로 빌드하는 정적 사이트로,
+GitHub Pages(`imbae.github.io`)에 GitHub Actions 로 자동 배포한다.
+한국어(`/`)와 영어(`/en/`)를 병행한다.
 
-- **호스팅**: GitHub Pages (`username.github.io`)
-- **CDN/보안**: Cloudflare (무료 플랜)
-- **기술 스택**: Vanilla HTML5 + CSS3 + JavaScript (빌드 도구 없음)
-- **배포 방식**: `git push` → GitHub Actions 자동 배포
-- **목표**: 빠른 로딩, 쉬운 콘텐츠 수정, 모던한 디자인
+- **빌드**: Eleventy 3.x + Nunjucks 템플릿 (`npm run build` → `_site/`)
+- **런타임**: 프레임워크 없음. 정적 HTML + `src/assets/js/main.js` (점진적 향상용 바닐라 JS)
+- **호스팅**: GitHub Pages (Source = GitHub Actions)
+- **디자인**: 다크 테마(`#0e0e0e`) + 라임 포인트(`#c8f53e`), Bebas Neue / DM Sans / DM Mono
 
----
-
-## 🗂️ 프로젝트 구조
+## 디렉터리 구조
 
 ```
-devfolio/
-├── CLAUDE.md                   ← 이 파일
-├── README.md                   ← 프로젝트 설명
-├── index.html                  ← 메인 페이지 (단일 페이지)
-│
-├── assets/
-│   ├── css/
-│   │   ├── main.css            ← 전역 스타일 + CSS 변수
-│   │   ├── components.css      ← 컴포넌트 스타일
-│   │   └── animations.css      ← 애니메이션
-│   │
-│   ├── js/
-│   │   ├── main.js             ← 진입점 (초기화)
-│   │   ├── data.js             ← ★ 콘텐츠 데이터 (이곳만 수정!)
-│   │   ├── renderer.js         ← 데이터 → DOM 렌더링
-│   │   └── animations.js       ← 스크롤 애니메이션, 인터랙션
-│   │
-│   └── images/
-│       ├── profile.jpg         ← 프로필 사진
-│       └── projects/           ← 프로젝트 스크린샷
-│
-└── .github/
-    └── workflows/
-        └── deploy.yml          ← GitHub Actions 자동 배포
+eleventy.config.js          빌드 설정 (컬렉션·필터·패스스루)
+package.json                의존성 · 스크립트
+src/
+  _data/
+    site.js                 사이트 전역 (이름/URL/nav/UI 문구, 언어별 { ko, en })
+    projects.js             프로젝트 통합 배열 ★ 프로젝트 수정은 여기
+    projectSets.js          projects.js 를 type 별로 분리 (pagination 용, 수정 불필요)
+    books.js                독서 기록 ★ 책 수정은 여기
+  _includes/
+    layouts/  base · page · note · project
+    partials/ header · footer · macros (projectRow / noteCard / bookRow)
+  assets/
+    css/  tokens · base · components · animations
+    js/   main.js
+  ko/                       한국어 페이지 (permalink 에서 /ko 제거 → 루트)
+  en/                       영어 페이지 (permalink /en/... 유지)
+    {index, work/, projects/, notes/, bookshelf/, portfolio/, about, now, uses}
+  notes/
+    ko/*.md  en/*.md        글(노트). frontmatter 로 project·tags·key 연결
+  feed/ko.njk feed/en.njk   Atom 피드
+  sitemap.njk  404.njk  root/robots.txt
+docs/                       개발 메모 (빌드 산출물서 제외)
 ```
 
----
+## 콘텐츠 수정 가이드
 
-## ✏️ 콘텐츠 수정 방법
+| 무엇을 | 어디를 |
+|--------|--------|
+| 프로필·연락처·내비게이션·UI 문구 | `src/_data/site.js` |
+| 프로젝트 추가/수정 (업무·개인·취미) | `src/_data/projects.js` |
+| 독서 기록 | `src/_data/books.js` |
+| 글 추가 | `src/notes/ko/<슬러그>.md` (+ 영어면 `src/notes/en/<슬러그>.md`) |
+| 정적 페이지 문구 (about/now/uses) | `src/ko/*.md`, `src/en/*.md` |
 
-### ★ `assets/js/data.js` 파일만 수정하면 됩니다!
+### 프로젝트 항목 스키마 (`projects.js`)
 
-```javascript
-// 이 파일만 수정하면 웹사이트 전체가 반영됩니다.
-
-export const PROFILE = {
-  name: "홍길동",
-  title: "WPF · C# · FFmpeg Developer",
-  description: "영상 처리와 드론 데이터 분석을 전문으로 하는 ...",
-  email: "your@email.com",
-  github: "https://github.com/username",
-  linkedin: "https://linkedin.com/in/username",
-  availableForWork: true,
-};
-
-export const STATS = [
-  { value: "5+", label: "years experience" },
-  { value: "12", label: "projects delivered" },
-  { value: "3",  label: "open source repos" },
-];
-
-export const SKILLS = [
-  {
-    icon: "🖥",
-    name: "Desktop Development",
-    tags: ["WPF", "C#", ".NET 8", "MVVM"],
-    color: "green",           // green | blue | amber | purple
-  },
-  // ...
-];
-
-export const PROJECTS = [
-  {
-    id: "videoplayer-pro",
-    name: "VideoPlayer Pro",
-    description: "WPF · ffmpeg.autogen · MISB · AI Subtitle",
-    tags: ["WPF", "FFmpeg", "Whisper"],
-    year: "2024",
-    status: "active",         // active | wip | archived
-    github: "https://github.com/...",
-    demo: "",                 // 데모 URL (없으면 빈 문자열)
-  },
-  // ...
-];
-
-export const EXPERIENCES = [
-  {
-    period: "2022 — present",
-    company: "회사명 주식회사",
-    role: "Senior Software Engineer",
-    description: "WPF 기반 영상 처리 시스템 개발...",
-  },
-  // ...
-];
-```
-
----
-
-## 🎨 디자인 시스템
-
-### 컬러 팔레트 (CSS 변수)
-
-```css
-/* assets/css/main.css */
-:root {
-  --color-bg:        #0e0e0e;   /* 배경 */
-  --color-surface:   #161616;   /* 카드/섹션 배경 */
-  --color-border:    rgba(255, 255, 255, 0.08);
-  --color-text:      #f5f2ec;   /* 본문 텍스트 */
-  --color-muted:     #888888;   /* 보조 텍스트 */
-  --color-accent:    #c8f53e;   /* 포인트 컬러 (라임) */
-  --color-accent-2:  #3e8ef5;   /* 보조 포인트 (블루) */
+```js
+{
+  slug, type: "work" | "personal" | "hobby", featured: bool,
+  period, status: "active" | "wip" | "archived",
+  stack: [], links: { repo, demo, writeup }, cover,
+  ko: { title, role, summary, highlights: [] },
+  en: { title, role, summary, highlights: [] },
 }
 ```
+- `/work` = `type==="work"`, `/projects` = 그 외, `/portfolio` = `featured`
+- 상세 페이지는 pagination 으로 자동 생성 (`src/{ko,en}/{work,projects}/detail.njk`)
 
-> 포인트 컬러를 바꾸고 싶으면 `--color-accent` 값만 변경하세요.
-
-### 타이포그래피
-
-```css
-/* 제목: Bebas Neue (임팩트 있는 디스플레이 폰트) */
-/* 본문: DM Sans (가독성 좋은 본문 폰트) */
-/* 코드/태그: DM Mono */
-```
-
-### 섹션 구조 (index.html에서 ID로 참조)
-
-| 섹션 ID | 설명 |
-|---------|------|
-| `#hero` | 메인 소개, 이름, CTA 버튼 |
-| `#stats` | 숫자 통계 바 |
-| `#skills` | 기술 스택 카드 그리드 |
-| `#projects` | 프로젝트 목록 |
-| `#experience` | 경력 사항 |
-| `#contact` | 연락처 + SNS 링크 |
-
----
-
-## 🚀 배포 파이프라인
-
-### 자동 배포 흐름
-
-```
-로컬 수정
-    ↓
-git add . && git commit -m "update: 프로젝트 추가"
-    ↓
-git push origin main
-    ↓
-GitHub Actions 자동 실행 (.github/workflows/deploy.yml)
-    ↓
-GitHub Pages에 배포 (1~2분 소요)
-    ↓
-https://username.github.io 에서 확인
-    ↓
-Cloudflare 캐시 자동 갱신
-```
-
-### GitHub Actions 워크플로우 (`deploy.yml`)
+### 글 frontmatter
 
 ```yaml
-name: Deploy Portfolio
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./        # 루트 디렉토리 배포
+title:    글 제목
+date:     2024-11-12
+updated:  2025-01-05     # 선택
+summary:  한 줄 요약      # 목록·피드에 노출
+tags:     [MISB, "C#"]
+project:  klv-parser      # projects.js 의 slug — 프로젝트 상세의 "관련 글" 에 연결
+key:      misb-klv-basics # 한/영 짝 연결용(선택)
+draft:    true            # 선택 — 빌드에서 제외
 ```
+`lang` 과 `permalink` 은 경로(`notes/ko` vs `notes/en`)로 자동 결정된다.
 
----
+## i18n 규칙
 
-## ☁️ Cloudflare 설정
+- `src/ko/**` → `/…`, `src/en/**` → `/en/…` (`ko.11tydata.js` / `en.11tydata.js` 의 `permalink`)
+- 공유 데이터는 `entry[lang]` 로 언어별 필드 접근 (`p.ko.title` 등)
+- 언어 스위처 URL 은 `altLangUrl` 필터로 생성 (`eleventy.config.js`)
+- 새 페이지는 **반드시 ko/en 양쪽에** 만들 것. 한쪽만 있으면 스위처가 깨진다.
 
-### 초기 연결 방법
-
-```
-1. cloudflare.com 가입
-2. 사이트 추가 → username.github.io 입력
-3. DNS 설정 → GitHub Pages IP 등록
-4. SSL/TLS → Full 모드 선택
-5. 캐싱 규칙 → HTML 캐시 무효화 설정 (아래 참고)
-```
-
-### 권장 캐시 규칙
-
-```
-# HTML 파일: 캐시하지 않음 (항상 최신 버전)
-Cache-Control: no-cache
-대상: *.html
-
-# CSS/JS/이미지: 1년 캐시 (파일명에 해시 포함)
-Cache-Control: max-age=31536000
-대상: assets/*
-```
-
-### Page Rules (무료 플랜 3개 제한)
-
-```
-1. username.github.io/* → Always Use HTTPS
-2. username.github.io/assets/* → Cache Level: Cache Everything
-3. username.github.io/ → Cache Level: Bypass (항상 최신 HTML)
-```
-
----
-
-## ⚡ 성능 최적화 원칙
-
-### 지켜야 할 규칙
-
-```
-✅ 외부 폰트는 Google Fonts 에서 preconnect + display=swap
-✅ 이미지는 WebP 포맷, width/height 속성 명시
-✅ JS는 defer 또는 type="module" 로 비동기 로드
-✅ CSS는 <head>에, JS는 </body> 직전에 배치
-✅ 애니메이션은 transform/opacity만 사용 (layout shift 방지)
-✅ 첫 화면(LCP)에 필요한 CSS는 <style> 인라인으로
-```
-
-### 금지 사항
-
-```
-❌ jQuery, Bootstrap 등 무거운 라이브러리 금지
-❌ 불필요한 npm 패키지 (빌드 도구 없는 프로젝트)
-❌ 큰 이미지 원본 그대로 사용 (반드시 압축)
-❌ 동기 JS 블로킹 (defer 없는 <script>)
-```
-
----
-
-## ♿ 접근성 체크리스트
-
-```
-✅ 모든 이미지에 alt 속성
-✅ 색상 대비 비율 4.5:1 이상
-✅ 키보드 탐색 가능 (Tab 순서 확인)
-✅ 스크린리더용 aria-label
-✅ <html lang="ko"> 설정
-✅ 제목 태그 계층 구조 (h1 → h2 → h3)
-```
-
----
-
-## 📱 반응형 브레이크포인트
-
-```css
-/* 기준 — Mobile First */
-/* 기본 */          /* 모바일: ~767px */
-@media (min-width: 768px)  { /* 태블릿 */ }
-@media (min-width: 1024px) { /* 데스크탑 */ }
-@media (min-width: 1280px) { /* 와이드 */ }
-```
-
----
-
-## 🔧 로컬 개발 환경
+## 로컬 개발
 
 ```bash
-# 빌드 도구 없이 바로 실행 (Live Server 추천)
-# VS Code 확장: Live Server (ritwickdey.LiveServer)
-
-# 또는 Python으로 간단한 로컬 서버
-python -m http.server 3000
-
-# 또는 Node.js
-npx serve .
+npm install
+npm run dev      # http://localhost:8080, 파일 감시
+npm run build    # _site/ 정적 빌드
 ```
 
----
+## 배포
 
-## 🤖 Claude에게 작업 요청 시 참고사항
+`main` 브랜치 push → `.github/workflows/deploy.yml`
+(checkout → setup-node 20 → `npm ci` → `npm run build` → upload `_site` → deploy-pages).
 
-- 콘텐츠 수정은 항상 `data.js` 기준으로 작성
-- 새 섹션 추가 시 `data.js` → `renderer.js` → `index.html` 순서로 반영
-- CSS 변수 (`--color-*`) 를 직접 수정하지 말고 변수로 참조
-- 애니메이션은 `prefers-reduced-motion` 미디어쿼리 항상 포함
-- 이미지 경로는 항상 상대경로 (`./assets/images/`)
-- 외부 API 없음 — 완전 정적 사이트 유지
+## 성능·접근성 원칙 (유지할 것)
+
+- 외부 의존: Google Fonts 만. 그 외 라이브러리 금지
+- 폰트는 `<link>` + `preconnect` + `display=swap` (`@import` 쓰지 말 것)
+- 애니메이션은 `transform`/`opacity` 만, `prefers-reduced-motion` 항상 대응
+- 이미지: WebP, `width`/`height` 명시, 상대경로 (`/assets/images/…`)
+- 색 대비 4.5:1 이상 (`--color-muted-2` 는 이 하한에 맞춘 값)
+- 모든 이미지 `alt`, 제목 계층 `h1→h2→h3`, `<html lang>` 정확히
+
+## 아직 안 된 것 (TODO)
+
+- `projects.js` / `books.js` / `about·now·uses` 의 `TODO(owner)` — 실제 정보로 교체
+- `links.repo` 가 전부 프로필 주소 → 개별 레포 주소로
+- `assets/images/` 아래 프로필 사진·프로젝트 스크린샷·`og-image.png`(1200×630),
+  준비되면 `base.njk` 의 `og:image` 주석 해제
+- Cloudflare / 커스텀 도메인 (선택)

@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: 책장
+description: 읽는 중 · 완독 · 읽고 싶은 책.
+---
+{%- from "partials/macros.njk" import bookRow -%}
+{%- set reading = books | where("status", "reading") -%}
+{%- set done = books | where("status", "done") -%}
+{%- set want = books | where("status", "want") -%}
+<div class="page-head">
+  <div class="container container--narrow">
+    <p class="page-head__label">reading log</p>
+    <h1 class="page-head__title">Bookshelf</h1>
+    <p class="page-head__intro">읽는 중, 완독, 읽고 싶은 책. 개인 프로젝트의 일부입니다.</p>
+  </div>
+</div>
+<div class="container container--narrow">
+  {%- if reading.length -%}<div class="book-group"><h2>읽는 중</h2>{%- for b in reading -%}{{ bookRow(b, "ko") }}{%- endfor -%}</div>{%- endif -%}
+  {%- if done.length -%}<div class="book-group"><h2>완독</h2>{%- for b in done -%}{{ bookRow(b, "ko") }}{%- endfor -%}</div>{%- endif -%}
+  {%- if want.length -%}<div class="book-group"><h2>읽고 싶은</h2>{%- for b in want -%}{{ bookRow(b, "ko") }}{%- endfor -%}</div>{%- endif -%}
+</div>
