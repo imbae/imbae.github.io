@@ -22,22 +22,22 @@ export default [
       title: "BGCS — 크로스플랫폼 GCS",
       role: "단독 설계 · 개발",
       summary:
-        "WPF 기반 드론 지상통제소(GCS)를 Avalonia UI로 재구현해 Windows·Android·iOS(추후 Web)를 한 코드베이스로 지원하는 프로젝트. Clean Architecture로 설계했고, 다기종·다버전 펌웨어 대응과 단위 테스트 2,600개 이상을 갖췄다.",
+        "WPF 기반 드론 지상통제소(GCS)를 Avalonia UI로 재구현해 Windows·Android·iOS(추후 Web)를 한 코드베이스로 지원하는 프로젝트. 계층 의존 규칙을 컴파일러로 강제하고, 다기종·다버전 펌웨어 대응 구조와 자동화 테스트 2,656개를 갖췄다.",
       highlights: [
-        "Clean Architecture 기반 계층·의존 방향 설계, 플랫폼 분기를 DI 등록 한 곳으로 제한",
-        "최대 255대 멀티 비히클 통신(UDP·TCP·Serial), 지수 백오프 재연결, 50Hz 텔레메트리 처리",
-        "단위 테스트 2,600개 이상 + Avalonia Headless UI 테스트 + 하드웨어(PILS) 통합 테스트",
+        "프로토콜 라이브러리를 UI가 참조하지 못하도록 컴파일 타임에 차단 — 계층 의존 방향과 플랫폼 분기를 규칙과 컴파일러로 강제",
+        "VehicleRegistry + 그룹별 다운링크 핸들러 + 메시지별 이벤트 채널, 새 메시지 ID 발급 방식의 펌웨어 버전 호환 정책",
+        "자동화 테스트 2,656개 + Avalonia Headless UI 테스트 + 하드웨어(PILS) 통합 테스트",
       ],
     },
     en: {
       title: "BGCS — cross-platform GCS",
       role: "Solo design · development",
       summary:
-        "A rebuild of a WPF drone ground control station (GCS) on Avalonia UI, targeting Windows, Android, iOS (and later the web) from one codebase. Designed with Clean Architecture, with multi-firmware support and 2,600+ unit tests.",
+        "A rebuild of a WPF drone ground control station (GCS) on Avalonia UI, targeting Windows, Android, iOS (and later the web) from one codebase. Layer dependencies are enforced by the compiler, with a structure for many firmware versions and 2,656 automated tests.",
       highlights: [
-        "Clean Architecture layering and dependency rules; platform branching confined to a single DI registration point",
-        "Up to 255 vehicles over UDP/TCP/Serial with exponential-backoff reconnect and 50 Hz telemetry handling",
-        "2,600+ unit tests, Avalonia Headless UI tests, and hardware (PILS) integration tests",
+        "The UI cannot reference the protocol library — enforced at compile time; layer direction and platform branching are held by rules and the compiler",
+        "VehicleRegistry + per-group downlink handlers + per-message event channels, and a firmware-compatibility policy that issues new message IDs",
+        "2,656 automated tests, Avalonia Headless UI tests, and hardware (PILS) integration tests",
       ],
     },
   },
