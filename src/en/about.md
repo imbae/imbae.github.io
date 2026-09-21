@@ -15,12 +15,14 @@ cross-platform Avalonia while expanding into AI engineering (RAG and similar).
 
 ### BrainsLab · Feb 2019 – present
 
-Ground-control software for drones and UAVs. I develop a GCS built on an in-house
-flight protocol (ICD) — fixed-wing, multicopter and rotary-wing — and am
-migrating it to a cross-platform Avalonia UI build ([BGCS](/en/work/bgcs/)).
-I've also worked on air-vehicle test equipment (K4586 ICD), a swarm-operations
-GCS, a counter-drone detection monitor, and a PILS simulation bridge. Most
-recently I've been standing up an internal AI (RAG) server.
+Ground-control software for drones and UAVs. I ran and developed a GCS built on an
+in-house flight protocol (OFP) for 7+ years ([GCSdev](/en/work/gcsdev/) — hybrid,
+fixed-wing, multicopter and rotary-wing) and am migrating it to a cross-platform
+Avalonia UI build ([BGCS](/en/work/bgcs/)). I've also built UAV ground test
+equipment (the **K4586** communication stack — the Korean localization of NATO
+STANAG 4586 — for [AVTE](/en/work/air-vehicle-test-equipment/)), single-vehicle and
+swarm-operations GCS, a counter-drone detection monitor, and a PILS simulation
+bridge. Most recently I've been standing up an internal AI (RAG) server.
 
 ### Samco · Aug 2016 – Dec 2018
 

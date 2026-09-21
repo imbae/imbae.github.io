@@ -1,18 +1,17 @@
 ---
 title: PILS simulation app
 projectSlug: pils-app
-description: A PILS bridge linking a commercial flight simulator to the flight software over serial.
+description: A PILS (Processor-In-the-Loop Simulation) bridge linking a commercial flight simulator to a real flight-control computer over serial.
 ---
 
-A desktop bridge that sets up a **PILS (Pilot-In-the-Loop Simulation)**
-environment. It reuses a commercial flight simulator's flight dynamics while the
-real flight software (flight-control computer / GCS / autopilot) runs on top of
-it — so it can be tested repeatedly with no real aircraft.
+A desktop bridge that sets up a **PILS (Processor-In-the-Loop Simulation)** environment. It reuses a commercial flight
+simulator's flight dynamics while a **real flight-control computer (FCC)** is wired in over serial and tested on top of
+it — so it can be exercised repeatedly with no aircraft, and it also serves GCS hardware integration tests.
 
 ## Setup
 
 ```
-[flight software]  ←(serial)→  [PILS App]  ←→  [MSFS / X-Plane]
+[flight-control computer]  ←(serial)→  [PILS App]  ←→  [MSFS / X-Plane]
 ```
 
 - **PILS model link** — connects to the flight model over serial (configurable
@@ -28,3 +27,9 @@ it — so it can be tested repeatedly with no real aircraft.
 - Serial transport split into two protocols, **Basic / Expansion**, each with its own packet walker and handler
 - `BlockingCircularStream` ring buffer handles partial-frame reception
 - WPF · .NET 8 · CommunityToolkit.Mvvm; configuration in XML (`ConfigureXmlParser`)
+
+## Where it is used
+
+In JDAD-GCS2 the simulator link made repeated verification possible without real flights, and in
+[BGCS](/en/work/bgcs/) a hardware integration test over a real FCC found defects unit tests could not — reconnection that was
+never implemented, and a device that rebooted after certain config commands.
