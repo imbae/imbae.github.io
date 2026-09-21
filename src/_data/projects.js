@@ -7,7 +7,6 @@
 //
 // 업무 프로젝트는 사내/방산 프로젝트라 저장소 링크가 없고, 방산 과제(AVTE·군집 GCS·JDAD-GCS)는
 // 기술 역량 중심으로만 서술한다 (임무·운용·성능·고객·구체 구성은 공개하지 않음).
-// TODO(owner): jdad-gcs 의 period 는 비어 있음 — 기간 확인 후 채우기.
 
 export default [
   {
@@ -134,7 +133,7 @@ export default [
     slug: "jdad-gcs",
     type: "work",
     featured: false,
-    period: "", // TODO(owner): 기간 확인 후 입력 (예: "2021 — 2023")
+    period: "2019 — 2021",
     status: "archived",
     stack: ["WPF", "C#", ".NET Framework", "MVVM Light", "Serial", "FFmpeg", "GMap.NET", "HelixToolkit"],
     links: { repo: "", demo: "", writeup: "" },
@@ -158,8 +157,8 @@ export default [
     slug: "drone-detecting-monitor",
     type: "work",
     featured: false,
-    period: "2023 —",
-    status: "active",
+    period: "2023 — 2026",
+    status: "archived",
     stack: ["WPF", "C#", ".NET 8", "UDP", "CRC16", "GMap.NET", "OxyPlot"],
     links: { repo: "", demo: "", writeup: "" },
     cover: "",

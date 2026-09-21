@@ -5,7 +5,7 @@ description: An integrated monitor that plots UDP data from drone-detection equi
 ---
 
 A Windows desktop monitor that **receives data from drone-detection equipment (radar, RF scanners…) over UDP → plots it on
-a live map → stores it in a binary log → replays it exactly**. Since December 2023 I have designed, built and
+a live map → stores it in a binary log → replays it exactly**. From December 2023 to 2026 I designed, built and
 maintained all of it alone — protocol, data pipeline, map visualization, logging and UI.
 
 ## Why it was needed
